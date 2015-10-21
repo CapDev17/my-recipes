@@ -62,8 +62,4 @@ class RecipeTest < ActiveSupport::TestCase
   end
   
   
-  
-  
-  
-
 end
