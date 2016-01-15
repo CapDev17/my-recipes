@@ -8,9 +8,11 @@
     </p>
   </div>
   <div class= "col-md-8">
-    <% if logged_in? and @recipe.chef == current_user %>
+    <% if logged_in? and (@recipe.chef == current_user || current_user.admin?) %>
       <%= link_to "Edit this Recipe", edit_recipe_path(@recipe), class: "btn btn-success pull-right" %>
-    <% end %>      
+    <% end %>    
+    <% if current_user.admin? %>
+      <%= link_to "[Delete Recipe]", @recipe, method: :delete, data: {confirm: "Are you sure?" } %>
     <h3><%= @recipe.summary %></h3>
     <div class= "show_recipe">
       <%= image_tag(@recipe.picture.url, class: "gravatar") if @recipe.picture? %>
@@ -39,3 +41,6 @@
 </div>
 
 <h5><%= link_to "Return to Recipes Listing", recipes_path, class: "btn btn-warning btn-small" %></h5>
+
+<% end %>
+
